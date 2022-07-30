@@ -16,16 +16,7 @@ public class LineManager : MonoBehaviour
 	public void TypeLetter(char letter)
 	{
 		if (!_wpmTimer.Started) _wpmTimer.Started = true;
-		if (Line.LineTyped())
-        {
-			if (letter == ' ')
-            {
-				_wpmTimer.AddWord();
-				_inkManager.SetWPM(_wpmTimer.GetWPM());
-				_inkManager.NextLine();
-			}
-			return;
-		}
+		
 		if (letter == Line.GetNextLetter())
         {
 			Line.TypeLetter();
@@ -34,6 +25,15 @@ public class LineManager : MonoBehaviour
 				_wpmTimer.AddWord();
 
 			}
+		}
+
+		if (Line.LineTyped())
+		{
+			_wpmTimer.AddWord();
+			_inkManager.SetWPM(_wpmTimer.GetWPM());
+			_inkManager.NextLine();
+
+			return;
 		}
 	}
 
